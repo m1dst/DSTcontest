@@ -91,6 +91,8 @@
             background-color: wheat;
         }
 
+
+
         .rst {
             width: 70px;
         }
@@ -113,6 +115,11 @@
 
         .callsign {
             width: 200px;
+        }
+
+        .has-error input, .has-error input:focus {
+            background-color: red;
+            color: white;
         }
     </style>
 </head>
@@ -142,9 +149,9 @@
                     <label class="" for="txtSerialRcv">Serial Rcv</label>
                     <input id="txtSerialRcv" type="text" class="major-field serial form-control input-lg" tabindex="6" />
                 </div>
-                <div class="form-group">
+                <div class="form-group has-error">
                     <label class="" for="txtIaruLocator">Locator</label>
-                    <input id="txtIaruLocator" type="text" class="major-field locator form-control input-lg" tabindex="7" />
+                    <input id="txtIaruLocator" type="text" class="major-field locator form-control input-lg" tabindex="7" value="I091CL" />
                 </div>
                 <div class="form-group">
                     <label class="" for="txtComments">Comments</label>
@@ -156,7 +163,7 @@
             <div>
                 <div id="qsoInformationText">England, EU - 304° (124°) - 265km (164mi)</div>
                 <div id="additionalInformationText">CQ: 14 - ITU: 1 - DXCC: G</div>
-                <div id="frequencyText" class="pull-right">FT-1000 [VFOA] - 14.200.00 USB</div>
+                <div id="frequencyText" class="pull-right">Elecraft K3 [VFOA] - 14.200.00 USB</div>
             </div>
         </fieldset>
     </form>
@@ -171,8 +178,6 @@
         "is_exclusive": true,
         "on_keyup": function (event) {
             event.preventDefault();
-            console.log("We've prevented the space key from doing anything!");
-
         },
         "on_keydown": function (event) {
             return false;
@@ -184,8 +189,6 @@
         "is_exclusive": true,
         "on_keyup": function (event) {
             event.preventDefault();
-            console.log("We've prevented the tab key from doing anything!");
-
         },
         "on_keydown": function (event) {
             return false;
@@ -198,7 +201,35 @@
         "is_exclusive": true,
         "on_keyup": function (event) {
             event.preventDefault();
-            alert("submit the qso");
+            alert("[DEMO]  This would submit the qso.");
+            $('#txtCallsign').val("");
+            $('#txtIaruLocator').val("");
+            $('#txtComments').val("");
+            $('#txtSerialRcv').val("");
+            $('#txtRstRcv').val("");
+            $('#txtRstSnt').val("599");
+            $('#txtIaruLocator').parent().removeClass("has-error");
+            $('#txtCallsign').focus();
+
+        },
+        "on_keydown": function (event) {
+            return false;
+        },
+        "this": my_scope
+    },
+    {
+        "keys": "-",
+        "is_exclusive": true,
+        "on_keyup": function (event) {
+            event.preventDefault();
+            $('#txtCallsign').val("");
+            $('#txtIaruLocator').val("");
+            $('#txtComments').val("");
+            $('#txtSerialRcv').val("");
+            $('#txtRstRcv').val("");
+            $('#txtRstSnt').val("599");
+            $('#txtIaruLocator').parent().removeClass("has-error");
+            $('#txtCallsign').focus();
 
         },
         "on_keydown": function (event) {
@@ -212,7 +243,7 @@
         "is_exclusive": true,
         "on_keyup": function (event) {
             event.preventDefault();
-            alert("cancel voice keyer etc.");
+            alert("[DEMO]  This would cancel voice/cw keyer etc.");
 
         },
         "on_keydown": function (event) {
@@ -398,13 +429,14 @@
             <ul>
                 <li>Major fields are the most commonly used data entry fields.  They are coloured off white.</li>
                 <li>The field with focus is bright yellow.</li>
-                <li>Validation has NOT been added yet. (eg: valid RST or Locator etc.)</li>
+                <li>Real-time validation has NOT been added yet. (eg: valid RST or Locator etc.)</li>
                 <li>Locking keyboard entry has NOT been added yet. (eg: numbers only for RST)</li>
                 <li>Rig and frequency div needs floating to the right.</li>
                 <li>Tabbing into RST autoselects the 99 in 599.</li>
-				<li>Uses a custom slashed zero font.</li>
-				<li>Fits nicely on an iPad (horizontal).</li>
-				<li>The beginnings of being reactive.</li>
+                <li>Uses a custom slashed zero font.</li>
+                <li>Fits nicely on an iPad (horizontal).</li>
+                <li>The beginnings of being reactive.</li>
+                <li>Validation styles created and demonstrated on locator input.  Locator is wrong in this example.  EG: I091 rather than IO91.  This would show as an error.  Submitting the QSO (press enter) or wiping the QSO (-) will show you clearing it.</li>
             </ul>
         </div>
         <div class="col-md-6">
@@ -420,6 +452,7 @@
                 <li>[Shift + Up Arrow] jumps to the beginning of the focused field and selects all text (from starting point)</li>
                 <li>[Escape] cancels any voice/cw keyer</li>
                 <li>[Enter] submits the QSO</li>
+                <li>[- (minus)] wipes the QSO</li>
             </ul>
         </div>
     </div>

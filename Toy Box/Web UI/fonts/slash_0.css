@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'SlashedZeroArialRegular';
+    src: url('slash_0.eot');
+    src: url('slash_0.eot') format('embedded-opentype'),
+         url('slash_0.woff') format('woff'),
+         url('slash_0.ttf') format('truetype'),
+         url('slash_0.svg#SlashedZeroArialRegular') format('svg');
+}

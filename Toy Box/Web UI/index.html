@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/keypress.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'SlashedZeroArialRegular';
+            src: url('fonts/slash_0.eot');
+            src: url('fonts/slash_0.eot') format('embedded-opentype'), url('fonts/slash_0.woff') format('woff'), url('fonts/slash_0.ttf') format('truetype'), url('fonts/slash_0.svg#SlashedZeroArialRegular') format('svg');
+        }
+
+        .contest-entry label {
+            display: block;
+            margin: 0 0 0 5px;
+        }
+
+
+        textarea:focus, input:focus {
+            outline: 0;
+        }
+
+        *:focus {
+            outline: 0;
+        }
+
+        input[type=text] {
+            text-transform: uppercase;
+            /*font-family: Consolas;*/
+            font-family: 'SlashedZeroArialRegular';
+            margin: 5px;
+            font-weight: bold;
+            color: black;
+        }
+
+            input[type=text]:focus {
+                background-color: yellow;
+            }
+
+        fieldset {
+            padding: 10px;
+        }
+
+            fieldset.normal {
+                background-color: darkgreen;
+            }
+
+            fieldset.multiplier {
+                background-color: blue;
+            }
+
+            fieldset.dupe {
+                background-color: red;
+            }
+
+            fieldset div {
+                color: white;
+                float: left;
+                font-family: Arial;
+                font-size: 8pt;
+                font-weight: bold;
+            }
+
+        #qsoInformationText {
+            padding: 0 30px 10px 0;
+            margin: 0 0 0 5px;
+        }
+
+        #additionalInformationText {
+            padding: 0 0 10px 0;
+            margin: 0 0 0 5px;
+        }
+
+        #frequencyText {
+            padding: 0 15px 10px 15px;
+        }
+
+        .major-field {
+            background-color: wheat;
+        }
+
+        .rst {
+            width: 70px;
+        }
+
+        .serial {
+            width: 80px;
+        }
+
+        .iota {
+            width: 90px;
+        }
+
+        .locator {
+            width: 110px;
+        }
+
+        .comments {
+            width: 200px;
+        }
+
+        .callsign {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <form class="form-inline contest-entry" role="form">
+        <fieldset class="normal">
+            <div>
+                <div class="focusguard" id="focusguard-1" tabindex="1"></div>
+                <div class="form-group">
+                    <label class="" for="txtCallsign">Callsign</label>
+                    <input id="txtCallsign" type="text" class="major-field callsign form-control input-lg" tabindex="2" value="" />
+                </div>
+                <div class="form-group">
+                    <label class="" for="txtCallsign">RST Snt</label>
+                    <input id="txtRstSnt" type="text" class="rst form-control input-lg" tabindex="3" value="599" />
+                </div>
+                <div class="form-group">
+                    <label class="" for="txtSerialRcv">Serial Rcv</label>
+                    <input id="txtSerialSnt" type="text" class="serial form-control input-lg" tabindex="4" value="001" disabled="disabled" />
+                </div>
+                <div class="form-group">
+                    <label class="" for="txtRstRcv">RST Rcv</label>
+                    <input id="txtRstRcv" type="text" class="rst form-control input-lg" tabindex="5" value="599" />
+                </div>
+                <div class="form-group">
+                    <label class="" for="txtSerialRcv">Serial Rcv</label>
+                    <input id="txtSerialRcv" type="text" class="major-field serial form-control input-lg" tabindex="6" />
+                </div>
+                <div class="form-group">
+                    <label class="" for="txtIaruLocator">Locator</label>
+                    <input id="txtIaruLocator" type="text" class="major-field locator form-control input-lg" tabindex="7" />
+                </div>
+                <div class="form-group">
+                    <label class="" for="txtComments">Comments</label>
+                    <input id="txtComments" type="text" class="comments form-control input-lg" tabindex="8" />
+                </div>
+                <div class="focusguard" id="focusguard-2" tabindex="9">
+                </div>
+            </div>
+            <div>
+                <div id="qsoInformationText">England, EU - 304° (124°) - 265km (164mi)</div>
+                <div id="additionalInformationText">CQ: 14 - ITU: 1 - DXCC: G</div>
+                <div id="frequencyText" class="pull-right">FT-1000 [VFOA] - 14.200.00 USB</div>
+            </div>
+        </fieldset>
+    </form>
+
+    <script>
+
+        my_scope = this;
+        my_combos = [
+
+    {
+        "keys": "space",
+        "is_exclusive": true,
+        "on_keyup": function (event) {
+            event.preventDefault();
+            console.log("We've prevented the space key from doing anything!");
+
+        },
+        "on_keydown": function (event) {
+            return false;
+        },
+        "this": my_scope
+    },
+    {
+        "keys": "tab",
+        "is_exclusive": true,
+        "on_keyup": function (event) {
+            event.preventDefault();
+            console.log("We've prevented the tab key from doing anything!");
+
+        },
+        "on_keydown": function (event) {
+            return false;
+        },
+        "this": my_scope
+    }
+    ,
+    {
+        "keys": "enter",
+        "is_exclusive": true,
+        "on_keyup": function (event) {
+            event.preventDefault();
+            alert("submit the qso");
+
+        },
+        "on_keydown": function (event) {
+            return false;
+        },
+        "this": my_scope
+    }
+    ,
+    {
+        "keys": "esc",
+        "is_exclusive": true,
+        "on_keyup": function (event) {
+            event.preventDefault();
+            alert("cancel voice keyer etc.");
+
+        },
+        "on_keydown": function (event) {
+            return false;
+        },
+        "this": my_scope
+    }
+
+
+        ];
+        keypress.register_many(my_combos);
+
+
+        $('#focusguard-2').on('focus', function () {
+            // "last" focus guard got focus: set focus to the first field
+            $('#txtCallsign').focus();
+        });
+
+        $('#focusguard-1').on('focus', function () {
+            // "first" focus guard got focus: set focus to the last field
+            $('#txtComments').focus();
+        });
+
+        $(function () {
+            var majorfields = $(".major-field");
+            var focusables = $("input:not([disabled])[type=text]");
+            focusables.keydown(function (e) {
+                switch (e.keyCode) {
+                    // space was pressed
+                    case 32:
+                        if (e.shiftKey) {
+                            //Focus previous input
+                            next = focusables.slice(0, jQuery.inArray(this, focusables)).filter(".major-field").last().length ? focusables.slice(0, jQuery.inArray(this, focusables)).filter(".major-field").last() : majorfields.last();
+                        }
+                        else {
+                            //Focus next input
+                            next = focusables.slice(jQuery.inArray(this, focusables) + 1).filter(".major-field").first().length ? focusables.slice(jQuery.inArray(this, focusables) + 1).filter(".major-field").first() : majorfields.eq(0);
+                        }
+                        next.focus();
+                        break;
+
+                        // tab was pressed
+                    case 9:
+                        if (e.shiftKey) {
+                            //Focus previous input
+                            next = jQuery.inArray(this, focusables) - 1 >= 0 ? focusables.eq(jQuery.inArray(this, focusables) - 1) : focusables.last();
+                        }
+                        else {
+                            // Focus next input
+                            next = jQuery.inArray(this, focusables) + 1 < focusables.length ? focusables.eq(jQuery.inArray(this, focusables) + 1) : focusables.first();
+                        }
+
+                        next.focus();
+                        break;
+
+                    case 39:  // right arrow key
+                        // Focus next input
+                        if (this.selectionEnd == this.value.length) {
+                            e.preventDefault();
+                            next = jQuery.inArray(this, focusables) + 1 < focusables.length ? focusables.eq(jQuery.inArray(this, focusables) + 1) : focusables.first();
+                            next.focusStart();
+                        }
+                        break;
+
+                    case 37: // left arrow.
+                        // Focus previous input
+                        if (this.selectionStart == 0) {
+                            e.preventDefault();
+                            next = jQuery.inArray(this, focusables) - 1 >= 0 ? focusables.eq(jQuery.inArray(this, focusables) - 1) : focusables.last();
+                            next.focusEnd();
+                        }
+                        break;
+
+                }
+
+            });
+
+            $(".rst").focus(function () {
+                $(this).setSelection(1, 3);
+            });
+
+            $(".rst").mouseup(function (e) {
+                e.preventDefault();
+            });
+
+            $(document).ready(function () {
+                $('#txtCallsign').focus();
+            });
+
+
+
+        });
+
+
+        function disableSelection(target) {
+            if (typeof target.onselectstart != "undefined") //IE route
+                target.onselectstart = function () { return false }
+            else if (typeof target.style.MozUserSelect != "undefined") //Firefox route
+                target.style.MozUserSelect = "none"
+            else //All other route (ie: Opera)
+                target.onmousedown = function () { return false }
+            target.style.cursor = "default"
+        }
+
+
+        function setInputSelection(input, startPos, endPos) {
+            //input.focus();
+            if (typeof input.selectionStart != "undefined") {
+                input.selectionStart = startPos;
+                input.selectionEnd = endPos;
+            } else if (document.selection && document.selection.createRange) {
+                // IE branch
+                input.select();
+                var range = document.selection.createRange();
+                range.collapse(true);
+                range.moveEnd("character", endPos);
+                range.moveStart("character", startPos);
+                range.select();
+            }
+        }
+
+        //set cursor position
+        $.fn.setCursorPosition = function (position) {
+            if (this.length == 0) return this;
+            return $(this).setSelection(position, position);
+        };
+
+        //set selection range
+        $.fn.setSelection = function (selectionStart, selectionEnd) {
+            if (this.length == 0) return this;
+            input = this[0];
+
+            if (input.createTextRange) {
+                var range = input.createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', selectionEnd);
+                range.moveStart('character', selectionStart);
+                range.select();
+            } else if (input.setSelectionRange) {
+                input.focus();
+                input.setSelectionRange(selectionStart, selectionEnd);
+            }
+
+            return this;
+        };
+
+
+        //Set focus to end of input:
+        $.fn.focusEnd = function () {
+            this.setCursorPosition(this.val().length);
+        };
+
+        //Set focus to beginning of input:
+        $.fn.focusStart = function () {
+            this.setCursorPosition(0);
+        };
+
+
+        $.fn.selectRange = function (start, end) {
+            return this.each(function () {
+                if (this.setSelectionRange) {
+                    this.focus();
+                    this.setSelectionRange(start, end);
+                } else if (this.createTextRange) {
+                    var range = this.createTextRange();
+                    range.collapse(true);
+                    range.moveEnd('character', end);
+                    range.moveStart('character', start);
+                    range.select();
+                }
+            });
+        };
+
+
+    </script>
+    <div class="alert alert-warning" style="margin: 50px;">
+        <p>It is important to remember that this is not live and is just a static HTML file.</p>
+    </div>
+
+    <div class="row" style="margin: 50px;">
+        <div class="col-md-6">
+            <h1>Notes</h1>
+            <ul>
+                <li>Major fields are the most commonly used data entry fields.  They are coloured off white.</li>
+                <li>The field with focus is bright yellow.</li>
+                <li>Validation has NOT been added yet. (eg: valid RST or Locator etc.)</li>
+                <li>Locking keyboard entry has NOT been added yet. (eg: numbers only for RST)</li>
+                <li>Rig and frequency div needs floating to the right.</li>
+                <li>Tabbing into RST autoselects the 99 in 599</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h1>Keyboard Entry Hints</h1>
+
+            <ul>
+                <li>[Tab] navigates between fields</li>
+                <li>[Space] navigates between major fields</li>
+                <li>[Left Arrow / Right Arrow] moves between text and fields</li>
+                <li>[Down Arrow] jumps to the end of the focused field</li>
+                <li>[Shift + Down Arrow] jumps to the end of the focused field and selects all text (from starting point)</li>
+                <li>[Up Arrow] jumps to the beginning of the focused field</li>
+                <li>[Shift + Up Arrow] jumps to the beginning of the focused field and selects all text (from starting point)</li>
+                <li>[Escape] cancels any voice/cw keyer</li>
+                <li>[Enter] submits the QSO</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+</html>

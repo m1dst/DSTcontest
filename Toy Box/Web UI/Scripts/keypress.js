@@ -964,6 +964,7 @@ Options available and defaults:
     109: "num_subtract",
     110: "num_decimal",
     111: "num_divide",
+    112: "f1",
     124: "print",
     144: "num",
     145: "scroll",

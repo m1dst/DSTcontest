@@ -14,6 +14,7 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <script src="Scripts/howler.min.js"></script>
 
     <style>
         @font-face {
@@ -201,16 +202,23 @@
         "is_exclusive": true,
         "on_keyup": function (event) {
             event.preventDefault();
-            alert("[DEMO]  This would submit the qso.");
-            $('#txtCallsign').val("");
-            $('#txtIaruLocator').val("");
-            $('#txtComments').val("");
-            $('#txtSerialRcv').val("");
-            $('#txtRstRcv').val("");
-            $('#txtRstSnt').val("599");
-            $('#txtIaruLocator').parent().removeClass("has-error");
-            $('#txtCallsign').focus();
 
+            if($('#txtCallsign').val().length > 0)
+            {
+                alert("[DEMO]  This would submit the qso.");
+                $('#txtCallsign').val("");
+                $('#txtIaruLocator').val("");
+                $('#txtComments').val("");
+                $('#txtSerialRcv').val("");
+                $('#txtRstRcv').val("");
+                $('#txtRstSnt').val("599");
+                $('#txtIaruLocator').parent().removeClass("has-error");
+                $('#txtCallsign').focus();
+            }
+            else
+            {
+                sound.play();
+            }
         },
         "on_keydown": function (event) {
             return false;
@@ -243,7 +251,21 @@
         "is_exclusive": true,
         "on_keyup": function (event) {
             event.preventDefault();
-            alert("[DEMO]  This would cancel voice/cw keyer etc.");
+            sound.stop();
+            //alert("[DEMO]  This would cancel voice/cw keyer etc.");
+
+        },
+        "on_keydown": function (event) {
+            return false;
+        },
+        "this": my_scope
+    },
+    {
+        "keys": "f1",
+        "is_exclusive": true,
+        "on_keyup": function (event) {
+            event.preventDefault();
+            sound.play();
 
         },
         "on_keydown": function (event) {
@@ -417,6 +439,13 @@
             });
         };
 
+var sound = new Howl({
+  urls: ['cq.mp3', 'cq.wav']
+});
+
+
+
+
 
     </script>
     <div class="alert alert-warning" style="margin: 50px;">
@@ -437,6 +466,7 @@
                 <li>Fits nicely on an iPad (horizontal).</li>
                 <li>The beginnings of being reactive.</li>
                 <li>Validation styles created and demonstrated on locator input.  Locator is wrong in this example.  EG: I091 rather than IO91.  This would show as an error.  Submitting the QSO (press enter) or wiping the QSO (-) will show you clearing it.</li>
+                <li>Voice keyer is a single shot.  It will support looping but not currently. It will also send a PTT signal via the server. <span class="label label-primary">New</span></li>
             </ul>
         </div>
         <div class="col-md-6">
@@ -453,6 +483,7 @@
                 <li>[Escape] cancels any voice/cw keyer</li>
                 <li>[Enter] submits the QSO</li>
                 <li>[- (minus)] wipes the QSO</li>
+                <li>[F1] Starts the voice keyer <span class="label label-primary">New</span></li>
             </ul>
         </div>
     </div>

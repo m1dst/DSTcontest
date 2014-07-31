@@ -1,4 +1,0 @@
-C:\Users\James\Source\Repos\DSTcontest\Tests\DSTcontest.Core.Tests\bin\Debug\DSTcontest.Core.Tests.dll
-C:\Users\James\Source\Repos\DSTcontest\Tests\DSTcontest.Core.Tests\bin\Debug\DSTcontest.Core.Tests.pdb
-C:\Users\James\Source\Repos\DSTcontest\Tests\DSTcontest.Core.Tests\obj\Debug\DSTcontest.Core.Tests.dll
-C:\Users\James\Source\Repos\DSTcontest\Tests\DSTcontest.Core.Tests\obj\Debug\DSTcontest.Core.Tests.pdb

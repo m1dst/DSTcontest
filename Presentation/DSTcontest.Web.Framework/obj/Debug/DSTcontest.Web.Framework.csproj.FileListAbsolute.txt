@@ -1,0 +1,4 @@
+C:\Users\James\Source\Repos\DSTcontest\Presentation\DSTcontest.Web.Framework\bin\Debug\DSTcontest.Web.Framework.dll
+C:\Users\James\Source\Repos\DSTcontest\Presentation\DSTcontest.Web.Framework\bin\Debug\DSTcontest.Web.Framework.pdb
+C:\Users\James\Source\Repos\DSTcontest\Presentation\DSTcontest.Web.Framework\obj\Debug\DSTcontest.Web.Framework.dll
+C:\Users\James\Source\Repos\DSTcontest\Presentation\DSTcontest.Web.Framework\obj\Debug\DSTcontest.Web.Framework.pdb

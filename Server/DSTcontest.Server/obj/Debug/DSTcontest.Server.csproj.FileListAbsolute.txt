@@ -1,0 +1,6 @@
+C:\Users\James\Source\Repos\DSTcontest\Server\DSTcontest\DSTcontest.Server\bin\Debug\DSTcontest.Server.exe.config
+C:\Users\James\Source\Repos\DSTcontest\Server\DSTcontest.Server\bin\Debug\DSTcontest.Server.exe.config
+C:\Users\James\Source\Repos\DSTcontest\Server\DSTcontest.Server\bin\Debug\DSTcontest.Server.exe
+C:\Users\James\Source\Repos\DSTcontest\Server\DSTcontest.Server\bin\Debug\DSTcontest.Server.pdb
+C:\Users\James\Source\Repos\DSTcontest\Server\DSTcontest.Server\obj\Debug\DSTcontest.Server.exe
+C:\Users\James\Source\Repos\DSTcontest\Server\DSTcontest.Server\obj\Debug\DSTcontest.Server.pdb

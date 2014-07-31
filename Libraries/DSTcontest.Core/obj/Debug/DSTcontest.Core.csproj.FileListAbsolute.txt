@@ -1,0 +1,4 @@
+C:\Users\James\Source\Repos\DSTcontest\Libraries\DSTcontest.Core\bin\Debug\DSTcontest.Core.dll
+C:\Users\James\Source\Repos\DSTcontest\Libraries\DSTcontest.Core\bin\Debug\DSTcontest.Core.pdb
+C:\Users\James\Source\Repos\DSTcontest\Libraries\DSTcontest.Core\obj\Debug\DSTcontest.Core.dll
+C:\Users\James\Source\Repos\DSTcontest\Libraries\DSTcontest.Core\obj\Debug\DSTcontest.Core.pdb
